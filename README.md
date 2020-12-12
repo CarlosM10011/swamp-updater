@@ -18,12 +18,11 @@ to build a self-packaged binary. Note that the default pyinstaller bootloaders
 get flagged by MS Defender, so you may have to build your own bootloaders if
 that happens to you. Building the pyinstaller bootloaders requires either MinGW
 or Visual Studio on Windows, so it may be easier for you to use the precompiled
-binaries located under the dist directory.
+binaries.
 
 Installation / Usage
 ================================================================================
-To use, simply copy over the swamp-updater.exe and swamp-updater-beta.exe
-binaries under the dist directory to your swamp directory. When ever you wish to
+To use, simply copy over the swamp-updater.exe and swamp-updater-beta.zip to your swamp directory. When ever you wish to
 update, simply run the executable from Windows Explorer. Edit the
 excluded_files.txt file if you wish to exclude files from being replaced.
 
