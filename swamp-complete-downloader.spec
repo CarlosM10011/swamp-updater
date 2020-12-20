@@ -17,8 +17,8 @@
 block_cipher = None
 
 
-a = Analysis(['swamp-updater-beta.py'],
-             pathex=['C:\\Users\\Carlos\\swamp-updater-beta'],
+a = Analysis(['swamp-complete-downloader.py'],
+             pathex=['C:\\Users\\Carlos\\swamp-updater'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -37,7 +37,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='swamp-updater-beta',
+          name='swamp-complete-downloader',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,

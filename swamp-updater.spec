@@ -42,6 +42,7 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
+          upx_exclude=['vcruntime140.dll', 'ucrtbase.dll'],
           runtime_tmpdir=None,
           console=True,
           manifest=None )

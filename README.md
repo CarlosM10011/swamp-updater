@@ -4,10 +4,10 @@ Swamp Updater
 This tool automates the process of updating a blind-person friendly FPS called
 swamp by downloading and unzipping the latest patch. It also allows you to
 exclude certain files from being replaced by adding them to a text file that is
-created when first launching it. This repository includes two versions of the
-utility: one updates the stable version, and the other updates the latest beta.
+created when first launching it. This repository includes three versions of the
+utility: one updates the stable version, one downloads the entire game, and the other updates the latest beta.
 Note that because of the way the zip files are packaged currently, you must
-download the swamp zip file because the patched zips do not have all the files,
+download the entire game because the patched zips do not have all the files,
 including the games assets.
 
 How to Build
@@ -18,11 +18,11 @@ to build a self-packaged binary. Note that the default pyinstaller bootloaders
 get flagged by MS Defender, so you may have to build your own bootloaders if
 that happens to you. Building the pyinstaller bootloaders requires either MinGW
 or Visual Studio on Windows, so it may be easier for you to use the precompiled
-binaries.
+binaries under releases.
 
 Installation / Usage
 ================================================================================
-To use, simply copy over the swamp-updater.exe and swamp-updater-beta.zip to your swamp directory. When ever you wish to
+To use, simply copy over the three files from the downloaded zip to your swamp directory. When ever you wish to
 update, simply run the executable from Windows Explorer. Edit the
 excluded_files.txt file if you wish to exclude files from being replaced.
 

@@ -80,8 +80,17 @@ def unzip_archive(file_path, exclude_list):
                     break
             if exclude == False:
                 replace_list.append(i)
-        zip_ref.extractall(members=replace_list)
+        for i in replace_list:
+            zip_ref.extract(i)
+        update_timestamps(zip_ref, replace_list)
     print('done')
+
+
+def update_timestamps(zip_ref, file_list):
+    for i in file_list:
+        info = zip_ref.getinfo(i)
+        date = time.mktime(info.date_time + (0, 0, -1))
+        os.utime(i, (date, date))
 
 
 def read_exclude_list():

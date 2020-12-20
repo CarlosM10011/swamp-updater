@@ -25,9 +25,10 @@ import time
 from tqdm import tqdm
 import zipfile
 
-def dl_swamp_patch(tmp_dir):
-    file_path = os.path.join(tmp_dir,'SwampPatch.zip')
-    print('Fetching file from \'https://www.kaldobsky.com/audiogames/swamptest.zip\'')
+def dl_swamp_patch(tmp_dir, file_name):
+    file_path = os.path.join(tmp_dir, file_name)
+    print('Fetching file from \'https://www.kaldobsky.com/audiogames/%s\''
+            %(file_name))
     downloaded_length = 0
     finished = False
     output = open(file_path,'ab')
@@ -39,7 +40,7 @@ def dl_swamp_patch(tmp_dir):
                     'Range': f'bytes={downloaded_length}-'
                     }
             response = requests.get(
-                    'https://www.kaldobsky.com/audiogames/swamptest.zip',
+                    'https://www.kaldobsky.com/audiogames/' + file_name,
                     stream=True, headers=resume_header)
             if not total_size_in_bytes:
                 total_size_in_bytes = int(response.headers.get('content-length', 0))
@@ -131,18 +132,33 @@ volumes.txt
     f.close()
 
 
+def call_patch_updater():
+    try:
+        print('Running swamp-updater.exe')
+        call(['swamp-updater'])
+    except FileNotFoundError as e:
+        print('Error running patch updater: %s' %(e))
+
+
 def main():
     try:
         tmp_dir = tempfile.mkdtemp()
-        print('Downloading update.')
-        file_path = dl_swamp_patch(tmp_dir)
+        print('Downloading files.')
+        part1 = dl_swamp_patch(tmp_dir, 'SwampPart1.zip')
+        part2 = dl_swamp_patch(tmp_dir, 'SwampPart2.zip')
         excludes = read_exclude_list()
-        print('extracting update...')
-        unzip_archive(file_path, excludes)
-        choice = input('Would you like to view the changelog? [y/n]: ')
+        print('extracting Part1...')
+        unzip_archive(part1, excludes)
+        print('extracting Part2...')
+        unzip_archive(part2, excludes)
+        choice = input('Would you like to download the latest patch in order to play online? [y/n]: ')
         if choice == 'y' or choice == 'Y':
-            call(['notepad','changelog.txt'])
-        print('Update complete.')
+            call_patch_updater()
+        else:
+            choice = input('Would you like to view the changelog? [y/n]: ')
+            if choice == 'y' or choice == 'Y':
+                call(['notepad','changelog.txt'])
+        print('Download complete.')
     except PermissionError as e:
         print('Error extracting update: %s' %(e))
         print('Make sure the game is closed before updating.')
